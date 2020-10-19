@@ -1,0 +1,91 @@
+
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    
+}
+
+@media only screen and (max-width: 700px) {
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 5rem;
+        padding-top: 5rem;
+    }
+}
+
+
+.item-one {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sushi, .masterchef {
+    color: rgb(91, 57, 38);
+    font-family: "Reem Kufi", sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-left: 8px;
+}
+
+.masterchef { font-family: "Kaushan Script", sans-serif; }
+
+.item-one-link {
+    text-decoration: none;
+    color: #5b3926;
+}
+
+
+.item-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-two-link {
+    color: rgb(170, 149, 133);
+    font-size: 18px;
+    font-weight: 700;
+    padding-right: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+    .item-two { margin: 3.5rem; }
+}
+.item-two-link:focus {
+    color: #d16c00;
+}
+.item-two-link:hover {
+    color: rgb(128, 94, 73);;
+}
+
+.item-three {
+    align-items: center;
+    background-color: rgb(240, 233, 231);
+    border: none;
+    border-radius: 12px;
+    box-shadow: rgb(226, 214, 207) 4px 4px 8px, rgb(247, 244, 242) -8px -8px 16px;
+    color: rgb(209, 108, 0);
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    height: 36px;
+    /* -webkit-box-pack: center; */
+    justify-content: center;
+    outline: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    /* width: 100%; */
+    white-space: nowrap;
+}
+
+.item-three-link {
+    text-decoration: none;
+}
+
