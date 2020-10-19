@@ -12,7 +12,7 @@ const Menu = () => {
             </div>
             <div className="card-container">
                 <div className="card-one">
-                    <div className="card-icon">Ice</div>
+                <div class="card-icon"><span role="img" aria-label="">🍣</span></div>
                     <div style={{margin: '1rem 0 3rem 0'}}>
                         <h4 className="card-head">Sushi Party!</h4>
                         <p className="card-text">Deposit SUSHI-ETH SLP</p>
@@ -27,7 +27,7 @@ const Menu = () => {
                     </div>
                 </div>
                 <div className="card-one">
-                    <div className="card-icon">Ice</div>
+                <div class="card-icon"><span role="img" aria-label="">🦄</span></div>
                     <div style={{margin: '1rem 0 3rem 0'}}>
                         <h4 className="card-head">Sushi Party!</h4>
                         <p className="card-text">Deposit SUSHI-ETH SLP</p>
@@ -42,7 +42,7 @@ const Menu = () => {
                     </div>
                 </div>
                 <div className="card-one">
-                    <div className="card-icon">Ice</div>
+                <div class="card-icon"><span role="img" aria-label="">🐢</span></div>
                     <div style={{margin: '1rem 0 3rem 0'}}>
                         <h4 className="card-head">Sushi Party!</h4>
                         <p className="card-text">Deposit SUSHI-ETH SLP</p>
