@@ -1,0 +1,126 @@
+
+
+.exchange-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .exchange-container {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 5rem;
+        padding-top: 5rem;
+    }
+}
+
+.nav-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 700px) {
+    .nav-right {
+        margin-top: 2rem;
+    }
+}
+
+.btn-container {
+    margin-left: 0.5rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+.wallet {
+    align-items: center;
+    background-color: rgb(240, 233, 231);
+    border: none;
+    border-radius: 12px;
+    box-shadow: rgb(226, 214, 207) 4px 4px 8px, rgb(247, 244, 242) -8px -8px 16px;
+    color: rgb(209, 108, 0);
+    background-color: rgb(230, 221, 214);
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    height: 38px;
+    justify-content: center;
+    outline: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    white-space: nowrap;
+}
+
+.settings {
+    position: relative;
+    width: 100%;
+    border: none;
+    margin: 0px;
+    height: 39px;
+    background-color: rgb(230, 221, 214);
+    padding: 0.15rem 0.8rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.dot {
+    width: 100%;
+    border: none;
+    margin: 0px;
+    height: 39px;
+    background-color: rgb(230, 221, 214);
+    padding: 0.15rem 0.8rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+.form-section {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    margin: 10rem auto;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px, rgba(0, 0, 0, 0.01) 0px 24px 32px;
+    border-radius: 30px;
+    padding: 3rem 1.5rem 2rem;
+}
+
+@media only screen and (max-width: 703200px) {
+    .form-section {
+        width: 80%;
+    }
+}
+
+.form-head {
+    display: flex;
+    flex-flow: row nowrap;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 3rem;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.span {
+    font-size: 23px;
+    cursor: pointer;
+    color: rgb(154, 124, 100);
+    font-weight: 700;
+}
+
+.active {
+    color: rgb(0, 0, 0);
+    outline: none;
+}

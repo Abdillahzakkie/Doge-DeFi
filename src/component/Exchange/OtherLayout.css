@@ -1,0 +1,123 @@
+
+
+.swap-container {
+    border-radius: 20px;
+    border: 1px solid rgb(255, 247, 242);
+    background-color: rgb(255, 255, 255);
+    padding: 1rem 1.4rem;
+    
+}
+
+.swap-head {
+    font-size: 1.6rem;
+}
+.swap-head p {
+    margin-top: .8rem;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input {
+    border: none;
+    font-size: 3rem;
+    width: 50%;
+    color: #aaa;
+    outline: none;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.max-btn {
+    background-color: rgb(240, 233, 231);
+    border: 1px solid rgb(240, 233, 231);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    padding: .6rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    color: rgb(128, 94, 73);
+}
+.max-btn:hover {
+    outline: navajowhite;
+}
+
+
+.svg {
+    margin: 0px .9rem 0px 0.5rem;
+    height: 35%;
+    font-size: 23px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+}
+
+.eth-btn {
+    align-items: center;
+    font-size: 23px;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 12px;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    padding: 0.6rem;
+}
+
+.eth-btn:hover {
+    background-color: rgb(255, 247, 242);
+}
+
+.token {
+    background-color: rgb(128, 94, 73);
+    padding: .6rem;
+    color: #fff;
+}
+
+.token:hover {
+    background-color: rgb(112, 82, 64);
+    
+}
+
+.amount-btn, .liquidity {
+    background-color: rgb(230, 221, 214);
+    color: rgb(154, 124, 100);
+    cursor: pointer;
+    box-shadow: none;
+    border: 1px solid transparent;
+    outline: none;
+    opacity: 1;
+    
+    width: 100%;
+    margin: 3rem 0 0;
+    font-size: 2.3rem;
+    padding: 2rem;
+    
+    font-weight: 500;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.liquidity {
+    background-color: rgb(128, 94, 73);
+    margin: 2rem 0;
+    color: #fff;
+}
+
+.liquidity:hover {
+    background-color: rgb(112, 82, 64);
+}
+
+.found {
+    font-size: 1.3rem;
+    border-radius: 16px;
+    padding: 40px 0;
+    border: 1px solid rgb(255, 247, 242);
+    background-color: rgb(255, 255, 255);
+}

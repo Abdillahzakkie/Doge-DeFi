@@ -1,15 +1,11 @@
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
     font-family: 'Noto Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #FFF8EE;
   max-width: 1200px;
   margin: 0 auto;
-  /* overflow: hidden; */
 }
 
 
@@ -33,5 +29,5 @@ a:link {
   html { font-size: 50%; }
 }
 @media only screen and (max-width: 30em) {
-  html { font-size: 30%; }
+  html { font-size: 35%; }
 }

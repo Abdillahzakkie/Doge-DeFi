@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import './Navbar.css';
+
+
 const NavBar = () => {
 
     return (
@@ -17,7 +19,7 @@ const NavBar = () => {
             <div className="item-two">
                 <Link to='/menu' className="item-two-link">Menu</Link>
                 <Link to='/stacking' className="item-two-link">Stacking</Link>
-                <Link to='/exchange' className="item-two-link">Exchange</Link>
+                <Link to='/exchange' className="item-two-link" target='blank'>Exchange</Link>
             </div>
             <div>
                 <button className="item-three">Unlock wallet</button>
