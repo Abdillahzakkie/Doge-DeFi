@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
+import { Navbar } from '../Navbar';
 import './Stacking.css';
 
 const Stacking = () => {

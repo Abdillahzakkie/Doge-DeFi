@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import './Navbar.css';
 
 
-const NavBar = () => {
+export const NavBar = () => {
 
     return (
         <div className="nav-container">
