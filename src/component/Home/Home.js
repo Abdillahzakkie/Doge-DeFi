@@ -1,7 +1,8 @@
 import React from 'react';
-import { Navbar } from '../Navbar';
+import Navbar from '../Navbar';
 import sushiChefLogo from "../../asset/chef.jpg";
 import { HomeContainer } from "./home.styled";
+import "./home.css";
 
 function Home() {
     return (
@@ -11,10 +12,8 @@ function Home() {
                 <div className="logo">
                     <img src={sushiChefLogo} alt=""/>
                 </div>
-                <h1>MasterChef is Ready</h1>
-                <h3>
-                    Stake SushiSwah3 LP tokens to claim your very own yummy SUSHI!
-                </h3>
+                <h4 className="select-dish">MasterChef is Ready</h4>
+                    <h3 className="sushi-token">Stake SushiSwah3 LP tokens to claim your very own yummy SUSHI!</h3>
             </div>
 
             <div className="grid container">

@@ -20,13 +20,14 @@ export default class UserProvider extends Component {
 
     // loadWeb3
     loadWeb3 = async () => {
+        console.log('tetsing')
         try {
             if(window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
                 await window.ethereum.enable();
                 // cancel autorefresh on network change
                 window.ethereum.autoRefreshOnNetworkChange = false;
-    
+                console.log(window.web3)
             } else if(window.web3) {
                 window.web3 = new Web3(window.web3.currentProvider);
             } else {
@@ -61,7 +62,7 @@ export default class UserProvider extends Component {
 
             const accounts = await web3.eth.getAccounts();
             const user = accounts[0];
-
+            
             this.setState({ 
                 loading: false,
                 web3, 
@@ -76,7 +77,14 @@ export default class UserProvider extends Component {
 
     connectWallet = async () => {
         await this.loadWeb3();
+        await this.loadBlockchainData();
+
+        console.log(
+            await this.state.puppyToken
+        )
     }
+
+
 
     render() {
         return (
