@@ -100,6 +100,17 @@ export default class UserProvider extends Component {
 
     }
 
+    isAddress = async _account => {
+        try {
+            const result = await this.state.web3.utils.isAddress(_account);
+            if(!result) throw new Error();
+            return result;
+        } catch (error) {
+            return { message: 'Not a valid account' }
+        }
+    }
+
+    /* PUPPY Token Contract */
     approvePuppyToken = async _amount => {
         try {
             const result = await this.state.puppyToken.methods.approve(
@@ -109,12 +120,92 @@ export default class UserProvider extends Component {
                 })
             );
             return result;
-
+    
         } catch (error) {
             console.log(error.message)
         }
     }
 
+    balanceOf = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.puppyToken.balanceOf(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    burn = async _amount => {
+        try {
+            const result = await this.state.puppyToken.burn(this.toWei(_amount)).send({
+                from: this.state.user,
+                gas: this.toWei(.0000000025)
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    burnByowner = async (_account, _amount) => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.puppyToken.burnByowner(_account, this.toWei(_amount)).send({
+                from: this.state.user,
+                gas: this.toWei(.0000000025)
+            })
+            return result;
+        } catch (error) {
+            console.log(error.message)   
+        }
+    }
+
+    decreaseAllowance = async (_account, _amount) => {
+        try {
+            this.isAddress(_account)
+            const result = await this.state.puppyToken.decreaseAllowance(
+                _account, this.toWei(_amount)
+            ).send({
+                from: this.state.user,
+                gas: this.toWei(.0000000025)
+            })
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    giveRewardsToStakers = async (_account, _amount) => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.giveRewardsToStakers(
+                _account, this.toWei(_amount)
+            ).send({
+                from: this.state.user,
+                gas: this.toWei(.0000000025)
+            })
+            return result
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    increaseAllowance = async (_account, _amount) => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.puppyToken.increaseAllowance(
+                _account, this.toWei(_amount)
+            ).send({
+                from: this.state.user, 
+                sgas: this.toWei(.0000000025)
+            })
+            return result
+        } catch (error) {   
+            console.log(error.message)
+        }
+    }
+    /* End Puppy token contract */
 
     render() {
         return (
@@ -122,7 +213,11 @@ export default class UserProvider extends Component {
                 ...this.state,
                 getSlug: this.getSlug,
                 connectWallet: this.connectWallet,
-                approvePuppyToken: this.approvePuppyToken
+                approvePuppyToken: this.approvePuppyToken,
+                balanceOf: this.balanceOf,
+                decreaseAllowance: this.decreaseAllowance,
+                giveRewardsToStakers: this.giveRewardsToStakers,
+                increaseAllowance: this.increaseAllowance
             }}>
                 {this.props.children}
             </userContext.Provider>
