@@ -6,7 +6,6 @@ import { data } from "../data/menu";
 import './Menu.css';
 
 const Menu = () => {
-
     const cardList = data.map(card => {
         return (
             <div className="card-one" key={card.id}>

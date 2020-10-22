@@ -2,6 +2,7 @@ import React, { Component, createContext } from 'react';
 import Web3 from 'web3';
 import { abi as dogeStakingAbi } from "../../contracts/dogestaking.json";
 import { abi as puppyAbi } from "../../contracts/puppy.json";
+import { data } from '../data/menu'
 
 const userContext = createContext();
 
@@ -87,6 +88,8 @@ export default class UserProvider extends Component {
 
     fromWei = value => this.state.web3.utils.fromWei(String(value), 'ether');
 
+    getSlug = id => data.find(item => item.id === id);
+
     connectWallet = async () => {
         await this.loadWeb3();
         await this.loadBlockchainData();
@@ -117,6 +120,7 @@ export default class UserProvider extends Component {
         return (
             <userContext.Provider value={{
                 ...this.state,
+                getSlug: this.getSlug,
                 connectWallet: this.connectWallet,
                 approvePuppyToken: this.approvePuppyToken
             }}>

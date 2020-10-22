@@ -15,8 +15,9 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/menu' component={Menu} />
           <Route exact path='/exchange' component={Exchange} />
-          <Route exact path='/stacking' component={Stacking} />
-          <Route exact path='/stacking/:id' component={SingleStakePage} />
+          <Route exact path='/staking' component={Stacking} />
+          <Route exact path='/staking/:id' component={SingleStakePage} />
+
         </Switch>
         <Footer/>
     </div>

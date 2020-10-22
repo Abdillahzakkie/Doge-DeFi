@@ -22,7 +22,7 @@ const NavBar = () => {
             <div className="item-two">
                 <Link to='/' className="item-two-link">Home</Link>
                 <Link to='/menu' className="item-two-link">Menu</Link>
-                <Link to='/stacking' className="item-two-link">Stacking</Link>
+                <Link to='/staking' className="item-two-link">Stacking</Link>
                 <Link to='/exchange' className="item-two-link" target='blank'>Exchange</Link>
             </div>
             <div>

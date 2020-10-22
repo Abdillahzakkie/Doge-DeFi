@@ -1,6 +1,6 @@
 export const data = [
     {
-        id: 1,
+        id: '1',
         icon: '🍣',
         title1: 'Sushi Party!',
         title2: 'Deposit SUSHI-ETH SLP',
@@ -8,7 +8,7 @@ export const data = [
         apy: 87.17,
     },
     {
-        id: 2,
+        id: '2',
         icon: '🦄',
         title1: 'Sushi Party!',
         title2: 'Deposit SUSHI-ETH SLP',
@@ -16,7 +16,7 @@ export const data = [
         apy: 87.17,
     },
     {
-        id: 3,
+        id: '3',
         icon: '🐢',
         title1: 'Sushi Party!',
         title2: 'Deposit SUSHI-ETH SLP',
@@ -24,7 +24,3 @@ export const data = [
         apy: 87.17,
     },
 ]
-
-export const getSlug = id => {
-    return data.find(item => item.id === id);
-}
