@@ -8,7 +8,9 @@ const setIsModalOpen = () => {
     const modal = document.querySelector('#modal-root');
     console.log(isModalOpen, modal.classList)
 
-    if(isModalOpen === true) modal.classList.remove('modal-root-hide');
+    isModalOpen 
+        ?  modal.classList.remove('modal-root-hide')
+        :  modal.classList.add('modal-root-hide')
 }
 
 export const renderSwapView = () => (
