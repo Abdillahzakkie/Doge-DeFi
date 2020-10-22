@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ExchangeContainer = styled.div`
     width: 100%;
     height: 100%;
-    margin: 6rem auto 0;
+    margin: 5rem auto 0;
     background: rgb(33, 36, 41);
     padding: 2rem;
     border-radius: 2rem;
