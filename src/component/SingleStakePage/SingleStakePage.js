@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ErrorBoundary } from "../ErrorBoundary";
 import { userContext } from '../Context';
 import Navbar from '../Navbar';
@@ -6,13 +6,18 @@ import '../Menu/Menu.css';
 import { SingleStakePageContainer } from "./singleStakePage.styled";
 
 const SingleStakePage = ({ match, history }) => {
+    const [approveAmount, setApproveAmount]= useState('');
     const userConsumer = useContext(userContext);
-    const { getSlug } = userConsumer;
+    const { getSlug, approvePuppyToken } = userConsumer;
 
     const card = getSlug(match.params.id);
     if(!card) return history.push('/menu');
 
     const { icon, title1, title2 } = card;
+    const handleApproveToken = e => {
+        if(approveAmount === '') return alert ('Please approve an amount before continuing');
+        approvePuppyToken(approveAmount)
+    }
 
     return (
         <>
@@ -41,9 +46,16 @@ const SingleStakePage = ({ match, history }) => {
                         </div>
                         <div style={{margin: '1rem 0 3rem 0'}}>
                             <h4 className="card-head">{title1}</h4>
-                            <p className="card-text">{title2}</p>
+                            {/* <p className="card-text">{title2}</p> */}
+                            <input 
+                                type="number" 
+                                value={approveAmount} 
+                                placeholder='0.00'
+                                min='0'
+                                onChange={e => setApproveAmount(e.target.value)}
+                            />
                         </div>
-                        <button className="card-btn">Approve</button>
+                        <button className="card-btn" onClick={handleApproveToken}>Approve</button>
                     </div>
                 </div>
             </SingleStakePageContainer>

@@ -95,21 +95,158 @@ export default class UserProvider extends Component {
         await this.loadBlockchainData();
 
         console.log(
-            await this.state.puppyToken.methods
+            this.toWei('0.000000025')
+        )
+        console.log(
+            await this.state.dogeContract.methods
         )
 
     }
 
-    approvePuppyToken = async _amount => {
+    isAddress = async _account => {
         try {
-            const result = await this.state.puppyToken.methods.approve(
-                this.state.puppyTokenAddress, this.toWei(10).send({
-                    from: this.state.user,
-                    gas: this.toWei(.0000000025)
-                })
-            );
+            const result = await this.state.web3.utils.isAddress(_account);
+            if(!result) throw new Error();
             return result;
+        } catch (error) {
+            return { message: 'Not a valid account' }
+        }
+    }
 
+    // DOGE-ETH
+    approveDogeEthTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.uniV2DogeEth(this.state.dogeContract._address, _amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    stakeDogeEthTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.stakeDogeEthTokens(_amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            })
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimableDogeETHPuppyTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.claimableDogeETHPuppyTokens(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthDogePuppyTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.claimEthDogePuppyTokens().send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            })
+            return result
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    // ETH-USDC
+    approveEthUsdtPuppyTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimableEthUsdtPuppyTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthUsdtPuppyTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.methods.claimEthUsdtPuppyTokens().send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    // ETH-USDT
+    approveEthUsdcTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    stakeEthUsdcTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.stakeEthUsdcTokens(_amount).send({
+                user: this.state.user,
+                from: this.toWei('0.000000025')
+            })
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimableEthUsdcTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.claimableEthUsdcTokens().call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthUsdcTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.methods.claimEthUsdcTokens().send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    stakedAllTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.stakedAllTokens(_account).call();
+            return result;
         } catch (error) {
             console.log(error.message)
         }
@@ -122,7 +259,11 @@ export default class UserProvider extends Component {
                 ...this.state,
                 getSlug: this.getSlug,
                 connectWallet: this.connectWallet,
-                approvePuppyToken: this.approvePuppyToken
+                approvePuppyToken: this.approvePuppyToken,
+                balanceOf: this.balanceOf,
+                decreaseAllowance: this.decreaseAllowance,
+                giveRewardsToStakers: this.giveRewardsToStakers,
+                increaseAllowance: this.increaseAllowance
             }}>
                 {this.props.children}
             </userContext.Provider>
