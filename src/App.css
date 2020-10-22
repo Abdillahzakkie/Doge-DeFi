@@ -1,0 +1,65 @@
+* , ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mainWhite: #f1f5f8;
+    --white: #fff;
+    --red: #e73a3a;
+    --yellow: #ffc107;
+    --orange: #d16c00;
+    --darkGrey: #333;
+    --lightGrey: #5c5c5cb6;
+    --mainGreen: #29ca8e;
+    --mainSpacing: .1rem;
+    --wordSpacing: .25rem;
+    --mainTransition : all 2s ease-in-out;
+}
+
+li {
+    list-style: none;
+    display: inline;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+input, button, textarea {
+    border: none;
+    outline: none;
+}
+button { cursor: pointer; }
+
+body {
+    position: relative;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#modal-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    width: 35%;
+    margin: auto;
+    z-index: 1;
+    background: transparent;
+    color: var(--white);
+    border-radius: 2rem;
+    margin-bottom: 10rem;
+}
+
+.modal-root-hide {
+    position: relative;
+    display: none;
+}

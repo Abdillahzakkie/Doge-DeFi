@@ -1,8 +1,8 @@
 import React from 'react';
 import Navbar from '../Navbar';
+import { ErrorBoundary } from "../ErrorBoundary";
 import sushiChefLogo from "../../asset/chef.jpg";
 import { HomeContainer } from "./home.styled";
-import "./home.css";
 
 function Home() {
     return (
@@ -37,4 +37,4 @@ function Home() {
     )                                                                       
 }
 
-export default Home
+export default ErrorBoundary(Home)

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { userContext } from '../Context';
+import { ErrorBoundary } from "../ErrorBoundary";
 import Navbar from '../Navbar';
 import './Stacking.css';
 
 const Stacking = () => {
-
+    const userConsumer = useContext(userContext);
+    const { approvePuppyToken } = userConsumer;
+    
     return (
         <>
             <Navbar/>
@@ -30,8 +34,8 @@ const Stacking = () => {
                             <h4 className="stacking-head">0.000</h4>
                             <p className="stacking-text">SUSHI Tokens Available</p>
                         </div>
-                        <button className="card-btn">
-                            <a href="/">Approve SUSHI</a>
+                        <button className="card-btn" onClick={approvePuppyToken}>
+                            Approve SUSHI
                         </button>
                     </div>
                     
@@ -44,4 +48,4 @@ const Stacking = () => {
     )
 }
 
-export default Stacking;
+export default ErrorBoundary(Stacking);

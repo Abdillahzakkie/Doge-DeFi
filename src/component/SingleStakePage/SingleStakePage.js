@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { ErrorBoundary } from "../ErrorBoundary";
 import Navbar from '../Navbar';
 import { getSlug } from "../data/menu";
 import '../Menu/Menu.css';
@@ -44,4 +44,4 @@ const SingleStakePage = ({ match, history }) => {
     )
 }
 
-export default withRouter(SingleStakePage);
+export default ErrorBoundary(SingleStakePage);

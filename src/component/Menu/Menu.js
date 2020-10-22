@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { ErrorBoundary } from "../ErrorBoundary";
 import Navbar from '../Navbar';
 import { data } from "../data/menu";
 import './Menu.css';
@@ -43,4 +44,4 @@ const Menu = () => {
     )
 }
 
-export default Menu;
+export default ErrorBoundary(Menu);
