@@ -12,7 +12,7 @@ const SingleStakePage = ({ match, history }) => {
     const card = getSlug(match.params.id);
     if(!card) return history.push('/menu');
 
-    const { icon, title1, title2, title3 } = card;
+    const { icon, title1, title2 } = card;
 
     return (
         <>
@@ -31,15 +31,8 @@ const SingleStakePage = ({ match, history }) => {
                         <div style={{margin: '1rem 0 3rem 0'}}>
                             <h4 className="card-head">{title1}</h4>
                             <p className="card-text">{title2}</p>
-                            <p className="card-text">{title3}</p>
                         </div>
-                        <button className="card-btn">
-                            <a href="/">Select</a>
-                        </button>
-                        <div className="card-footer">
-                            <span>APY</span>
-                            <span>{card.apy}%</span>
-                        </div>
+                        <button className="card-btn">Harvest</button>
                     </div>
 
                     <div className="card-one">
@@ -49,15 +42,8 @@ const SingleStakePage = ({ match, history }) => {
                         <div style={{margin: '1rem 0 3rem 0'}}>
                             <h4 className="card-head">{title1}</h4>
                             <p className="card-text">{title2}</p>
-                            <p className="card-text">{title3}</p>
                         </div>
-                        <button className="card-btn">
-                            <a href="/">Select</a>
-                        </button>
-                        <div className="card-footer">
-                            <span>APY</span>
-                            <span>{card.apy}%</span>
-                        </div>
+                        <button className="card-btn">Approve</button>
                     </div>
                 </div>
             </SingleStakePageContainer>
