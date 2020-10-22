@@ -18,7 +18,7 @@ const Menu = () => {
                     <p className="card-text">{card.title3}</p>
                 </div>
                 <button className="card-btn">
-                    <Link to={`/staking/${card.id}`}>Select</Link>
+                    <Link to={`/staking/${card.id}`}>{card.title3}</Link>
                 </button>
                 <div className="card-footer">
                     <span>APY</span>

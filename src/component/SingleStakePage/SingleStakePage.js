@@ -3,7 +3,7 @@ import { ErrorBoundary } from "../ErrorBoundary";
 import { userContext } from '../Context';
 import Navbar from '../Navbar';
 import '../Menu/Menu.css';
-import './singleStakePage.css';
+import { SingleStakePageContainer } from "./singleStakePage.styled";
 
 const SingleStakePage = ({ match, history }) => {
     const userConsumer = useContext(userContext);
@@ -17,7 +17,7 @@ const SingleStakePage = ({ match, history }) => {
     return (
         <>
             <Navbar />  
-            <div className="menu-container">
+            <SingleStakePageContainer className="menu-container">
                 <div className="menu-item-one">
                     <img src={require("../../asset/chef.jpg")} alt="chef" height="120px"/>
                     <h4 className="select-dish">Select your favourite dishes</h4>
@@ -60,7 +60,7 @@ const SingleStakePage = ({ match, history }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </SingleStakePageContainer>
         </>
     )
 }
