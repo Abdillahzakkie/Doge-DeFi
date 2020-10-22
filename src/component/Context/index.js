@@ -95,7 +95,10 @@ export default class UserProvider extends Component {
         await this.loadBlockchainData();
 
         console.log(
-            await this.state.puppyToken.methods
+            this.toWei('0.000000025')
+        )
+        console.log(
+            await this.state.dogeContract.methods
         )
 
     }
@@ -110,37 +113,12 @@ export default class UserProvider extends Component {
         }
     }
 
-    /* PUPPY Token Contract */
-    approvePuppyToken = async _amount => {
+    // DOGE-ETH
+    approveDogeEthTokens = async _amount => {
         try {
-            const result = await this.state.puppyToken.methods.approve(
-                this.state.puppyTokenAddress, this.toWei(10).send({
-                    from: this.state.user,
-                    gas: this.toWei(.0000000025)
-                })
-            );
-            return result;
-    
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    balanceOf = async _account => {
-        try {
-            this.isAddress(_account);
-            const result = await this.state.puppyToken.balanceOf(_account).call();
-            return result;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    burn = async _amount => {
-        try {
-            const result = await this.state.puppyToken.burn(this.toWei(_amount)).send({
+            const result = await this.state.dogeContract.methods.uniV2DogeEth(this.state.dogeContract._address, _amount).send({
                 from: this.state.user,
-                gas: this.toWei(.0000000025)
+                gas: this.toWei('0.000000025')
             });
             return result;
         } catch (error) {
@@ -148,27 +126,11 @@ export default class UserProvider extends Component {
         }
     }
 
-    burnByowner = async (_account, _amount) => {
+    stakeDogeEthTokens = async _amount => {
         try {
-            this.isAddress(_account);
-            const result = await this.state.puppyToken.burnByowner(_account, this.toWei(_amount)).send({
+            const result = await this.state.dogeContract.methods.stakeDogeEthTokens(_amount).send({
                 from: this.state.user,
-                gas: this.toWei(.0000000025)
-            })
-            return result;
-        } catch (error) {
-            console.log(error.message)   
-        }
-    }
-
-    decreaseAllowance = async (_account, _amount) => {
-        try {
-            this.isAddress(_account)
-            const result = await this.state.puppyToken.decreaseAllowance(
-                _account, this.toWei(_amount)
-            ).send({
-                from: this.state.user,
-                gas: this.toWei(.0000000025)
+                gas: this.toWei('0.000000025')
             })
             return result;
         } catch (error) {
@@ -176,14 +138,21 @@ export default class UserProvider extends Component {
         }
     }
 
-    giveRewardsToStakers = async (_account, _amount) => {
+    claimableDogeETHPuppyTokens = async _account => {
         try {
             this.isAddress(_account);
-            const result = await this.state.giveRewardsToStakers(
-                _account, this.toWei(_amount)
-            ).send({
+            const result = await this.state.dogeContract.claimableDogeETHPuppyTokens(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthDogePuppyTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.claimEthDogePuppyTokens().send({
                 from: this.state.user,
-                gas: this.toWei(.0000000025)
+                gas: this.toWei('0.000000025')
             })
             return result
         } catch (error) {
@@ -191,21 +160,98 @@ export default class UserProvider extends Component {
         }
     }
 
-    increaseAllowance = async (_account, _amount) => {
+    // ETH-USDC
+    approveEthUsdtPuppyTokens = async _amount => {
         try {
-            this.isAddress(_account);
-            const result = await this.state.puppyToken.increaseAllowance(
-                _account, this.toWei(_amount)
-            ).send({
-                from: this.state.user, 
-                sgas: this.toWei(.0000000025)
-            })
-            return result
-        } catch (error) {   
+            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
             console.log(error.message)
         }
     }
-    /* End Puppy token contract */
+
+    claimableEthUsdtPuppyTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthUsdtPuppyTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.methods.claimEthUsdtPuppyTokens().send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    // ETH-USDT
+    approveEthUsdcTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    stakeEthUsdcTokens = async _amount => {
+        try {
+            const result = await this.state.dogeContract.methods.stakeEthUsdcTokens(_amount).send({
+                user: this.state.user,
+                from: this.toWei('0.000000025')
+            })
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimableEthUsdcTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.claimableEthUsdcTokens().call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    claimEthUsdcTokens = async () => {
+        try {
+            const result = await this.state.dogeContract.methods.claimEthUsdcTokens().send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            });
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    stakedAllTokens = async _account => {
+        try {
+            this.isAddress(_account);
+            const result = await this.state.dogeContract.methods.stakedAllTokens(_account).call();
+            return result;
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
     render() {
         return (
