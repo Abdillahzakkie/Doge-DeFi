@@ -12,9 +12,10 @@ export const SingleStakePageContainer = styled.div`
         .card-one {
             input {
                 height: 50px;
-                width: 100%;
+                width: 30%;
+                margin: 0 auto;
                 background : transparent;
-                border-bottom: 1.5px solid var(--lightGrey);
+                // border-bottom: 1.5px solid var(--lightGrey);
                 padding: 0 1rem;
                 font-size: 2rem;
                 letter-spacing: var(--mainSpacing);

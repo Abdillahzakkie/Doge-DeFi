@@ -32,13 +32,9 @@ input, button, textarea {
 }
 button { cursor: pointer; }
 
-body {
-    position: relative;
-}
+body { position: relative; }
 
-.App {
-    overflow-x: hidden;
-}
+.App { overflow-x: hidden; }
 .grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -62,19 +58,13 @@ body {
 }
 
 @media only screen and (max-width: 60rem) {
-    #modal-root {
-        width: 45vw;
-    }
+    #modal-root { width: 45vw; }
 }
 @media only screen and (max-width: 30rem) {
-    #modal-root {
-        width: 70vw;
-    }
+    #modal-root { width: 70vw; }
 }
 @media only screen and (max-width: 25rem) {
-    #modal-root {
-        width: 95%;
-    }
+    #modal-root { width: 95%; }
 }
 
 .modal-root-hide {

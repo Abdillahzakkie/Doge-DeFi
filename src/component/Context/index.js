@@ -131,10 +131,10 @@ export default class UserProvider extends Component {
         }
     }
 
-    claimableDogeETHPuppyTokens = async _account => {
+    claimableDogeETHPuppyTokens = async () => {
         try {
-            const result = await this.state.dogeContract.claimableDogeETHPuppyTokens(
-                _account
+            const result = await this.state.dogeContract.methods.claimableDogeETHPuppyTokens(
+                this.state.user
             ).call();
             return result;
         } catch (error) {
@@ -144,7 +144,7 @@ export default class UserProvider extends Component {
 
     claimEthDogePuppyTokens = async () => {
         try {
-            const result = await this.state.dogeContract.claimEthDogePuppyTokens().send({
+            const result = await this.state.dogeContract.methods.claimEthDogePuppyTokens().send({
                 from: this.state.user,
                 gas: '60000'
             })
@@ -184,10 +184,10 @@ export default class UserProvider extends Component {
         } catch (error) { console.log(error.message) }
     }
 
-    claimableEthUsdtPuppyTokens = async _account => {
+    claimableEthUsdtPuppyTokens = async () => {
         try {
             const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
-                _account
+                this.state.user
             ).call();
             return result;
         } catch (error) {
@@ -239,9 +239,11 @@ export default class UserProvider extends Component {
         }
     }
 
-    claimableEthUsdcTokens = async _account => {
+    claimableEthUsdcTokens = async () => {
         try {
-            const result = await this.state.dogeContract.methods.claimableEthUsdcTokens().call();
+            const result = await this.state.dogeContract.methods.claimableEthUsdcTokens(
+                this.state.user
+            ).call();
             return result;
         } catch (error) {
             console.log(error.message)

@@ -10,6 +10,10 @@
     padding-bottom: 48px;
     padding-top: 48px;
 }
+.menu-item-one img {
+    display: block;
+    margin: auto auto 2.5rem;
+}
 
 .select-dish {
     font-family: "Kaushan Script", sans-serif;

@@ -28,7 +28,8 @@ export function Navbar({ theme }) {
                 to={item.replace('','/').toLowerCase()}
                 className='mainSpacing'
             >
-                {item === '' ? 'Home' : item}
+                {
+                item === '' ? 'Home' : item }
             </NavLink>
         );
     });
