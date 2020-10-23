@@ -49,14 +49,34 @@ body {
     top: 0;
     left: 0;
     right: 0;
+<<<<<<< HEAD
     height: 80vh;
     width: 35%;
+=======
+    width: 35vw;
+>>>>>>> bb4225ac53e4ed5d5e4919a02bf2b961537d67b4
     margin: auto;
     z-index: 1;
     background: transparent;
     color: var(--white);
     border-radius: 2rem;
     margin-bottom: 10rem;
+}
+
+@media only screen and (max-width: 60rem) {
+    #modal-root {
+        width: 45vw;
+    }
+}
+@media only screen and (max-width: 30rem) {
+    #modal-root {
+        width: 70vw;
+    }
+}
+@media only screen and (max-width: 25rem) {
+    #modal-root {
+        width: 95%;
+    }
 }
 
 .modal-root-hide {
