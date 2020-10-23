@@ -2,6 +2,7 @@ import React, { Component, createContext } from 'react';
 import Web3 from 'web3';
 import { abi as dogeStakingAbi } from "../../contracts/dogestaking.json";
 import { abi as puppyAbi } from "../../contracts/puppy.json";
+import { abi as ERC20_TOKEN } from "../../contracts/ERC20_token.json";
 import { data } from '../data/menu'
 
 const userContext = createContext();
@@ -18,9 +19,9 @@ export default class UserProvider extends Component {
             dogeTokenAddress: null,
             puppyToken: null,
             puppyTokenAddress: null,
-            ETHDOGEADDRESS: null,
-            EthUSDTAddress: null,
-            EthUSDCAddress: null,
+            ETH_DOGE: null,
+            EHT_USDT: null,
+            EHT_USDC: null,
         }
     }
 
@@ -53,16 +54,19 @@ export default class UserProvider extends Component {
             // const owner = '0xC2B749E8A879706882AF10A3611BA3767bE2314d';
 
             // ETHDOGEADDRESS
-            const ETHDOGEADDRESS = '0xDb8b2D5E991019AB60F59c3c309b13F8425b9EB6';
+            const ETH_DOGE_ADDRESS = '0xDb8b2D5E991019AB60F59c3c309b13F8425b9EB6';
 
             // ETHUSDT
-            const EthUSDTAddress = '0x1AD04f1458fE6A5F8E0A624eDc75D683a1FB7521';
+            const EHT_USDT_ADDRESS = '0x1AD04f1458fE6A5F8E0A624eDc75D683a1FB7521';
 
             // ETHUSDC
-            const EthUSDCAddress = '0x354Df7895E1Be211e00aD9252625df81cA6E1A37';
+            const EHT_USDC_ADDRESS = '0x354Df7895E1Be211e00aD9252625df81cA6E1A37';
 
             const dogeContract = new web3.eth.Contract(dogeStakingAbi, dogeTokenAddress);
             const puppyToken = new web3.eth.Contract(puppyAbi, puppyTokenAddress);
+            const ETH_DOGE = new web3.eth.Contract(ERC20_TOKEN, ETH_DOGE_ADDRESS);
+            const EHT_USDT = new web3.eth.Contract(ERC20_TOKEN, EHT_USDT_ADDRESS);
+            const EHT_USDC = new web3.eth.Contract(ERC20_TOKEN, EHT_USDC_ADDRESS);
 
             const accounts = await web3.eth.getAccounts();
             const user = accounts[0];
@@ -75,9 +79,9 @@ export default class UserProvider extends Component {
                 dogeTokenAddress,
                 puppyToken,
                 puppyTokenAddress,
-                ETHDOGEADDRESS,
-                EthUSDTAddress,
-                EthUSDCAddress
+                ETH_DOGE,
+                EHT_USDT,
+                EHT_USDC
             });
         } catch (error) {
             console.log(error)
@@ -93,30 +97,27 @@ export default class UserProvider extends Component {
     connectWallet = async () => {
         await this.loadWeb3();
         await this.loadBlockchainData();
-
-        console.log(
-            this.toWei('0.000000025')
-        )
         console.log(
             await this.state.dogeContract.methods
         )
-
     }
 
-    isAddress = async _account => {
+    stakedAllTokens = async _account => {
         try {
-            const result = await this.state.web3.utils.isAddress(_account);
-            if(!result) throw new Error();
+            const result = await this.state.dogeContract.methods.stakedAllTokens(_account).call();
             return result;
         } catch (error) {
-            return { message: 'Not a valid account' }
+            console.log(error.message)
         }
     }
 
     // DOGE-ETH
     approveDogeEthTokens = async _amount => {
         try {
-            const result = await this.state.dogeContract.methods.uniV2DogeEth(this.state.dogeContract._address, _amount).send({
+            const result = await this.state.ETH_DOGE.methods.approve(
+                this.state.dogeContract._address,
+                _amount.toString()
+            ).send({
                 from: this.state.user,
                 gas: this.toWei('0.000000025')
             });
@@ -128,7 +129,9 @@ export default class UserProvider extends Component {
 
     stakeDogeEthTokens = async _amount => {
         try {
-            const result = await this.state.dogeContract.methods.stakeDogeEthTokens(_amount).send({
+            const result = await this.state.dogeContract.methods.stakeDogeEthTokens(
+                _amount.toString()
+            ).send({
                 from: this.state.user,
                 gas: this.toWei('0.000000025')
             })
@@ -140,8 +143,9 @@ export default class UserProvider extends Component {
 
     claimableDogeETHPuppyTokens = async _account => {
         try {
-            this.isAddress(_account);
-            const result = await this.state.dogeContract.claimableDogeETHPuppyTokens(_account).call();
+            const result = await this.state.dogeContract.claimableDogeETHPuppyTokens(
+                _account
+            ).call();
             return result;
         } catch (error) {
             console.log(error.message)
@@ -160,10 +164,13 @@ export default class UserProvider extends Component {
         }
     }
 
-    // ETH-USDC
+    // ETH-USDT
     approveEthUsdtPuppyTokens = async _amount => {
         try {
-            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+            const result = await this.state.EHT_USDT.methods.approve(
+                this.state.dogeContract._address, 
+                _amount.toString()
+            ).send({
                 from: this.state.user,
                 gas: this.toWei('0.000000025')
             });
@@ -173,10 +180,23 @@ export default class UserProvider extends Component {
         }
     }
 
+    stakeEthUsdtTokens = async _amount => {
+        try {
+            const result = await this.state.EHT_USDT.methods.stakeEthUsdtTokens(
+                _amount.toString()
+            ).send({
+                from: this.state.user,
+                gas: this.toWei('0.000000025')
+            })
+            return result;
+        } catch (error) { console.log(error.message) }
+    }
+
     claimableEthUsdtPuppyTokens = async _account => {
         try {
-            this.isAddress(_account);
-            const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(_account).call();
+            const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
+                _account
+            ).call();
             return result;
         } catch (error) {
             console.log(error.message)
@@ -195,10 +215,13 @@ export default class UserProvider extends Component {
         }
     }
 
-    // ETH-USDT
+    // ETH-USDC
     approveEthUsdcTokens = async _amount => {
         try {
-            const result = await this.state.dogeContract.methods.approve(this.state.dogeContract._address, _amount).send({
+            const result = await this.state.EHT_USDC.methods.approve(
+                this.state.dogeContract._address, 
+                _amount.toString()
+            ).send({
                 from: this.state.user,
                 gas: this.toWei('0.000000025')
             });
@@ -210,7 +233,9 @@ export default class UserProvider extends Component {
 
     stakeEthUsdcTokens = async _amount => {
         try {
-            const result = await this.state.dogeContract.methods.stakeEthUsdcTokens(_amount).send({
+            const result = await this.state.dogeContract.methods.stakeEthUsdcTokens(
+                _amount.toString()
+            ).send({
                 user: this.state.user,
                 from: this.toWei('0.000000025')
             })
@@ -222,7 +247,6 @@ export default class UserProvider extends Component {
 
     claimableEthUsdcTokens = async _account => {
         try {
-            this.isAddress(_account);
             const result = await this.state.dogeContract.methods.claimableEthUsdcTokens().call();
             return result;
         } catch (error) {
@@ -242,16 +266,6 @@ export default class UserProvider extends Component {
         }
     }
 
-    stakedAllTokens = async _account => {
-        try {
-            this.isAddress(_account);
-            const result = await this.state.dogeContract.methods.stakedAllTokens(_account).call();
-            return result;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
 
     render() {
         return (
@@ -259,11 +273,25 @@ export default class UserProvider extends Component {
                 ...this.state,
                 getSlug: this.getSlug,
                 connectWallet: this.connectWallet,
-                approvePuppyToken: this.approvePuppyToken,
-                balanceOf: this.balanceOf,
-                decreaseAllowance: this.decreaseAllowance,
-                giveRewardsToStakers: this.giveRewardsToStakers,
-                increaseAllowance: this.increaseAllowance
+                stakedAllTokens: this.stakedAllTokens,
+
+                // DOGE-ETH
+                approveDogeEthTokens: this.approveDogeEthTokens,
+                stakeDogeEthTokens: this.stakeDogeEthTokens,
+                claimableDogeETHPuppyTokens: this.claimableDogeETHPuppyTokens,
+                claimEthDogePuppyTokens: this.claimEthDogePuppyTokens,
+
+                // ETH-USDC
+                approveEthUsdtPuppyTokens: this.approveEthUsdtPuppyTokens,
+                stakeEthUsdtTokens: this.stakeEthUsdtTokens,
+                claimableEthUsdtPuppyTokens: this.claimableEthUsdtPuppyTokens,
+                claimEthUsdtPuppyTokens: this.claimEthUsdtPuppyTokens,
+
+                // ETH-USDT
+                approveEthUsdcTokens: this.approveEthUsdcTokens,
+                stakeEthUsdcTokens: this.stakeEthUsdcTokens,
+                claimableEthUsdcTokens: this.claimableEthUsdcTokens,
+                claimEthUsdcTokens: this.claimEthUsdcTokens
             }}>
                 {this.props.children}
             </userContext.Provider>

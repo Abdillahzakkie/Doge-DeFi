@@ -36,6 +36,9 @@ body {
     position: relative;
 }
 
+.App {
+    overflow-x: hidden;
+}
 .grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -49,12 +52,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-<<<<<<< HEAD
-    height: 80vh;
-    width: 35%;
-=======
     width: 35vw;
->>>>>>> bb4225ac53e4ed5d5e4919a02bf2b961537d67b4
     margin: auto;
     z-index: 1;
     background: transparent;

@@ -16,14 +16,16 @@
     grid-column: 1/4;
     width: 100%;
     margin-left: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .navbar .nav-brand a h2 span { color: var(--red) }
 
 /* Nav list */
 .navbar .nav-list {
-    grid-column: 4/11;
+    grid-column: 4/12;
     text-transform: capitalize;
+    place-items: center;
 }
 .navbar .nav-list ul a {
     padding: 0 .5rem;
@@ -35,10 +37,19 @@
 
 /* Nav icons button */
 .navbar .nav-icons {
-    grid-template-columns: repeat(3, 1fr);
-    grid-column: 11/13;
+    grid-column: 13;
     height: 35px;
     width: 100%;
+    place-items: end;
+}
+
+.navbar .nav-icons button {
+    padding: 1.5rem 3rem;
+    color: #d16c00;
+    font-weight: bolder;
+    letter-spacing: var(--mainSpacing);
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px var(--lightGrey);
 }
 
 .navbar .nav-icons a img,
@@ -81,11 +92,15 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
+        place-items: start;
+        width: 100%;
+        border-bottom: 1px solid var(--white);
     }
 
     .navbar .nav-list ul a {
         padding: .5rem 1rem;
         letter-spacing: var(--mainSpacing);
+        width: 100%;
     }
 
     /* Nav toggle */
@@ -94,5 +109,7 @@
         grid-column: 13;
         font-size: 1.25rem;
         cursor: pointer;
+        color: #d16c00;
+        font-size: 3rem;
     }
 }

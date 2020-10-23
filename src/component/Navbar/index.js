@@ -1,26 +1,24 @@
 import React, { useState, useContext } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { BiCloudUpload } from "react-icons/bi";
 import { userContext } from "../Context";
 import { NavbarContainer } from './navbar.styled.js';
-import user from '../../asset/chef.jpg';
 import './navbar.css';
 
 export function Navbar({ theme }) {
     const [navOpen, setNavOpen] = useState(false);
 
-    const web3Consumer = useContext(userContext);
-    const { isLoggedIn, userData } = web3Consumer;
+    const userConsumer = useContext(userContext);
+    const { connectWallet, user } = userConsumer;
 
     const _active = {
         'padding': '.75rem',
-        'background': 'var(--mainGreen)',
+        'background': '#d16c00',
         'borderTopLeftRadius': '1rem',
         'borderBottomRightRadius': '1rem'
     }
-    let Navlist = ['', 'Products','Blog', 'About',  'Contact'];
+
+    let Navlist = ['', 'Menu','Staking', 'Exchange'];
     Navlist = Navlist.map((item, i) => {
         return (
             <NavLink 
@@ -39,9 +37,8 @@ export function Navbar({ theme }) {
         <NavbarContainer className='grid navbar' theme={theme}>
             <div className="grid nav-brand">
                 <Link to='/'>
-                    {/* <img src={logo} alt="Edumark"/> */}
                     <h2 className='mainSpacing'>
-                        Silk<span>road</span>
+                        Sushi<span>Swap</span>
                     </h2>
                 </Link>
             </div>
@@ -49,21 +46,9 @@ export function Navbar({ theme }) {
                 <ul>{Navlist}</ul>
             </div>
             <div className="grid nav-icons">
-                <Link to='/cart' className='grid'>
-                    <AiOutlineShoppingCart className='icon' />
-                </Link>
-
-                <Link to={isLoggedIn ? '/products/auth/new' : '/login'}  className={isLoggedIn ? 'grid' : 'hide'}>
-                    <BiCloudUpload className='icon' />
-                </Link>
-
-                <Link to={isLoggedIn ? '/products/auth/new' : '/login'} className='grid'>
-                    <img 
-                        src={isLoggedIn ? userData.image : user} 
-                        alt="user" 
-                        className={isLoggedIn ? 'online': 'offline'}
-                    />
-                </Link>
+                <button onClick={connectWallet}>
+                    {user ? 'My Wallet' : 'Unlock Wallet'}
+                </button>
             </div>
             <div className="toggle">
                 <FaAlignRight className='icon' onClick={() => setNavOpen(!navOpen)} />
