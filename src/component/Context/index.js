@@ -50,16 +50,8 @@ export default class UserProvider extends Component {
             const web3 = window.web3;
             const puppyTokenAddress = '0x5d8aFECB6D10e5a3a88E2B7b4F3a8ed726cb0e62';
             const dogeTokenAddress = '0xf22DAC468E448A77e7c2F119d8dad2F079765490';
-
-            // const owner = '0xC2B749E8A879706882AF10A3611BA3767bE2314d';
-
-            // ETHDOGEADDRESS
             const ETH_DOGE_ADDRESS = '0xDb8b2D5E991019AB60F59c3c309b13F8425b9EB6';
-
-            // ETHUSDT
             const EHT_USDT_ADDRESS = '0x1AD04f1458fE6A5F8E0A624eDc75D683a1FB7521';
-
-            // ETHUSDC
             const EHT_USDC_ADDRESS = '0x354Df7895E1Be211e00aD9252625df81cA6E1A37';
 
             const dogeContract = new web3.eth.Contract(dogeStakingAbi, dogeTokenAddress);
@@ -97,9 +89,6 @@ export default class UserProvider extends Component {
     connectWallet = async () => {
         await this.loadWeb3();
         await this.loadBlockchainData();
-        console.log(
-            await this.state.dogeContract.methods
-        )
     }
 
     stakedAllTokens = async _account => {
@@ -119,8 +108,9 @@ export default class UserProvider extends Component {
                 _amount.toString()
             ).send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             });
+            console.log(result);
             return result;
         } catch (error) {
             console.log(error.message)
@@ -133,7 +123,7 @@ export default class UserProvider extends Component {
                 _amount.toString()
             ).send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             })
             return result;
         } catch (error) {
@@ -156,8 +146,9 @@ export default class UserProvider extends Component {
         try {
             const result = await this.state.dogeContract.claimEthDogePuppyTokens().send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             })
+            console.log(result);
             return result
         } catch (error) {
             console.log(error.message)
@@ -172,8 +163,9 @@ export default class UserProvider extends Component {
                 _amount.toString()
             ).send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             });
+            console.log(result);
             return result;
         } catch (error) {
             console.log(error.message)
@@ -186,7 +178,7 @@ export default class UserProvider extends Component {
                 _amount.toString()
             ).send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             })
             return result;
         } catch (error) { console.log(error.message) }
@@ -207,8 +199,9 @@ export default class UserProvider extends Component {
         try {
             const result = await this.state.dogeContract.methods.claimEthUsdtPuppyTokens().send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             });
+            console.log(result);
             return result;
         } catch (error) {
             console.log(error.message)
@@ -223,8 +216,9 @@ export default class UserProvider extends Component {
                 _amount.toString()
             ).send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             });
+            console.log(result);
             return result;
         } catch (error) {
             console.log(error.message)
@@ -258,8 +252,9 @@ export default class UserProvider extends Component {
         try {
             const result = await this.state.dogeContract.methods.claimEthUsdcTokens().send({
                 from: this.state.user,
-                gas: this.toWei('0.000000025')
+                gas: '60000'
             });
+            console.log(result);
             return result;
         } catch (error) {
             console.log(error.message)
@@ -274,6 +269,7 @@ export default class UserProvider extends Component {
                 getSlug: this.getSlug,
                 connectWallet: this.connectWallet,
                 stakedAllTokens: this.stakedAllTokens,
+                totalPuppyToken: this.totalPuppyToken,
 
                 // DOGE-ETH
                 approveDogeEthTokens: this.approveDogeEthTokens,

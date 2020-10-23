@@ -18,7 +18,7 @@ export function Navbar({ theme }) {
         'borderBottomRightRadius': '1rem'
     }
 
-    let Navlist = ['', 'Menu','Staking', 'Exchange'];
+    let Navlist = ['', 'Farm', 'Exchange'];
     Navlist = Navlist.map((item, i) => {
         return (
             <NavLink 
