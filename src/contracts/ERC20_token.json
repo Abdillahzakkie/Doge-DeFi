@@ -1,7 +1,18 @@
 {
     "abi": [
 		{
-			"inputs": [],
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_symbol",
+					"type": "string"
+				}
+			],
 			"stateMutability": "nonpayable",
 			"type": "constructor"
 		},
@@ -83,12 +94,12 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "spender",
+					"name": "_recipient",
 					"type": "address"
 				},
 				{
 					"internalType": "uint256",
-					"name": "amount",
+					"name": "_amount",
 					"type": "uint256"
 				}
 			],

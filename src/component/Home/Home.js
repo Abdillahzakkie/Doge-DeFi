@@ -13,24 +13,34 @@ function Home() {
                     <img src={sushiChefLogo} alt=""/>
                 </div>
                 <h4 className="select-dish">MasterChef is Ready</h4>
-                    <h3 className="sushi-token">Stake SushiSwah3 LP tokens to claim your very own yummy SUSHI!</h3>
+                <h3 className="sushi-token">Stake SushiSwah3 LP tokens to claim your very own yummy SUSHI!</h3>
             </div>
 
             <div className="grid container">
                 <section className="grid section-icon">
-                    {/* eslint-disable-next-line */}
-                    <span>🍣</span>
+                    <div className="icon">
+                        <span  role="img" aria-label="">🍣</span>
+                    </div>
                     <div className="grid token">
                         <p>Your SUSHI Balance</p>
-                        <h3>Locked</h3>
+                        <h1>Locked</h1>
                     </div>
                     <div className="grid result">
                         <p>pending harvesting</p>
-                        <p id='right'>0.000 SUSHI</p>
+                        <p id='right'>0.00 SUSHI</p>
                     </div>
                 </section>
-                <section className="grid">
-                    Hello
+
+
+                <section className="grid section-icon sec-two">
+                    <div className="grid token">
+                        <p>Total SUSHI Supply</p>
+                        <h1>Locked</h1>
+                    </div>
+                    <div className="grid result">
+                        <p>New rewards per block</p>
+                        <p id='right'>100 SUSHI</p>
+                    </div>
                 </section>
             </div>
         </HomeContainer>
