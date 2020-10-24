@@ -44,7 +44,7 @@ const Exchange = () => {
                     <span id="swap" className={`span ${display === 'swap' ? 'active': ''}`} onClick={toggleDisplay}>Swap</span>
                     <span id="pool" className={`span ${display === 'pool' ? 'active': ''}`} onClick={toggleDisplay}>Pool</span>
                 </div>
-                {display === 'pool'? renderPoolView() : renderSwapView()  }
+                {display === 'pool'? renderPoolView() : renderSwapView()}
             </div>
         </div>
     )
