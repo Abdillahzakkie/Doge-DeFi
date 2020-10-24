@@ -26,20 +26,20 @@ export const handleStakeToken = (
     loading, 
     stakeAmount, 
     card,
-    claimEthDogePuppyTokens, 
-    claimEthUsdtPuppyTokens,
-    claimEthUsdcTokens
+    stakeDogeEthTokens, 
+    stakeEthUsdtTokens,
+    stakeEthUsdcTokens
 ) => (e) => {
     e.preventDefault();
     if(loading) return alert('Unlock your account to proceed');
 
     if(stakeAmount === '') return alert ('Please stake an amount before continuing');
     if(card.title1 === 'Water') {
-        claimEthDogePuppyTokens(stakeAmount)
+        stakeDogeEthTokens(stakeAmount)
     } else if(card.title1 === 'Fish') {
-        claimEthUsdtPuppyTokens(stakeAmount);
+        stakeEthUsdtTokens(stakeAmount);
     } else if(card.title1 === 'Eat') {
-        claimEthUsdcTokens(stakeAmount)
+        stakeEthUsdcTokens(stakeAmount)
     }
     return;
 }

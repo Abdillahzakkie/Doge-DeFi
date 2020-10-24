@@ -24,7 +24,11 @@ const SingleStakePage = ({ match, history }) => {
         claimableEthUsdtPuppyTokens,
         approveEthUsdcTokens ,
         claimEthUsdcTokens,
-        claimableEthUsdcTokens
+        claimableEthUsdcTokens,
+
+        stakeDogeEthTokens, 
+        stakeEthUsdtTokens,
+        stakeEthUsdcTokens
     } = userConsumer;
     const card = getSlug(match.params.id);
     let shouldReload = false;
@@ -56,7 +60,7 @@ const SingleStakePage = ({ match, history }) => {
     if(!card) return history.push('/menu');
     
     const submitApprove = async e => {
-        await handleApproveToken(
+        const result = await handleApproveToken(
             loading, 
             approveAmount, 
             card,
@@ -64,21 +68,23 @@ const SingleStakePage = ({ match, history }) => {
             approveEthUsdtPuppyTokens,
             approveEthUsdcTokens
         )(e)
+        console.log(result)
     }
 
-    const submitStake = async () => {
-        await handleStakeToken(
+    const submitStake = async e => {
+        const result = await handleStakeToken(
             loading, 
             stakeAmount, 
             card,
-            claimEthDogePuppyTokens, 
-            claimEthUsdtPuppyTokens,
-            claimEthUsdcTokens
-        )
+            stakeDogeEthTokens, 
+            stakeEthUsdtTokens,
+            stakeEthUsdcTokens
+        )(e)
+        console.log(result)
     }
 
     const submitHarvest = async e => {
-        await handleHarvestToken(
+        const result = await handleHarvestToken(
             loading,
             card,
             harvestBalance,
@@ -86,6 +92,7 @@ const SingleStakePage = ({ match, history }) => {
             claimEthUsdtPuppyTokens,
             claimEthUsdcTokens
         )(e)
+        console.log(result)
     }
 
     if(harvestBalance === '0') shouldReload = true;

@@ -50,9 +50,9 @@ export default class UserProvider extends Component {
             const web3 = window.web3;
             const puppyTokenAddress = '0x5d8aFECB6D10e5a3a88E2B7b4F3a8ed726cb0e62';
             const dogeTokenAddress = '0xf22DAC468E448A77e7c2F119d8dad2F079765490';
-            const ETH_DOGE_ADDRESS = '0xDb8b2D5E991019AB60F59c3c309b13F8425b9EB6';
-            const EHT_USDT_ADDRESS = '0x1AD04f1458fE6A5F8E0A624eDc75D683a1FB7521';
-            const EHT_USDC_ADDRESS = '0x354Df7895E1Be211e00aD9252625df81cA6E1A37';
+            const ETH_DOGE_ADDRESS = '0xB6D116D1453766eA8A91D9a9A9A868Ca8BD63afe';
+            const EHT_USDT_ADDRESS = '0x664ac36070547928Bd8f7e67dC84608D89b25cc6';
+            const EHT_USDC_ADDRESS = '0xaaB0558240789562b0f1da62bcE87acEF9c2F7ae';
 
             const dogeContract = new web3.eth.Contract(dogeStakingAbi, dogeTokenAddress);
             const puppyToken = new web3.eth.Contract(puppyAbi, puppyTokenAddress);
@@ -62,6 +62,21 @@ export default class UserProvider extends Component {
 
             const accounts = await web3.eth.getAccounts();
             const user = accounts[0];
+
+            // console.log(
+            //     await ETH_DOGE.methods.approve(dogeContract._address, 1000).send({
+            //         from: user,
+            //         gas: '50000'
+            //     })
+            // )
+
+            console.log(
+                await ETH_DOGE.methods.balanceOf(user).call()
+            )
+
+            console.log(
+                await ETH_DOGE.methods.allowance(user, dogeContract._address).call()
+            )
             
             this.setState({ 
                 loading: false,
