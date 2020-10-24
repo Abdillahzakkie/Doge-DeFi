@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ErrorBoundary } from "../ErrorBoundary";
 import Navbar from '../Navbar';
 import { data } from "../data/menu";
-import './Menu.css';
+import './Farm.css';
 
 const Menu = () => {
     const cardList = data.map(card => {
@@ -15,10 +15,9 @@ const Menu = () => {
                 <div style={{margin: '1rem 0 3rem 0'}}>
                     <h4 className="card-head">{card.title1}</h4>
                     <p className="card-text">{card.title2}</p>
-                    <p className="card-text">{card.title3}</p>
                 </div>
                 <button className="card-btn">
-                    <Link to={`/staking/${card.id}`}>{card.title3}</Link>
+                    <Link to={`/farm/${card.id}`}>{card.title3}</Link>
                 </button>
                 <div className="card-footer">
                     <span>APY</span>

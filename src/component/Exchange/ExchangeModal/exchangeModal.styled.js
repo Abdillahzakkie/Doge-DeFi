@@ -24,5 +24,4 @@ export const ExchangeContainer = styled.div`
             backgroud: red;
         }
     }
-
 `
