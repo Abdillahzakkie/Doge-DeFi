@@ -1,7 +1,6 @@
 import React, { Component, createContext } from 'react';
 import Web3 from 'web3';
 import { abi as dogeStakingAbi } from "../../contracts/dogestaking.json";
-import { abi as puppyAbi } from "../../contracts/puppy.json";
 import { abi as ERC20_TOKEN } from "../../contracts/ERC20_token.json";
 import { data } from '../data/menu'
 
@@ -17,8 +16,6 @@ export default class UserProvider extends Component {
             user: null,
             dogeContract: null,
             dogeTokenAddress: null,
-            puppyToken: null,
-            puppyTokenAddress: null,
             ETH_DOGE: null,
             EHT_USDT: null,
             EHT_USDC: null,
@@ -48,14 +45,12 @@ export default class UserProvider extends Component {
     loadBlockchainData = async () => {
         try {
             const web3 = window.web3;
-            const puppyTokenAddress = '0x5d8aFECB6D10e5a3a88E2B7b4F3a8ed726cb0e62';
-            const dogeTokenAddress = '0xf22DAC468E448A77e7c2F119d8dad2F079765490';
-            const ETH_DOGE_ADDRESS = '0xB6D116D1453766eA8A91D9a9A9A868Ca8BD63afe';
-            const EHT_USDT_ADDRESS = '0x664ac36070547928Bd8f7e67dC84608D89b25cc6';
-            const EHT_USDC_ADDRESS = '0xaaB0558240789562b0f1da62bcE87acEF9c2F7ae';
+            const dogeTokenAddress = '0xb4fbed161bebcb37afb1cb4a6f7ca18b977ccb25';
+            const ETH_DOGE_ADDRESS = '0xb6916bc20cae34de64af39b8534d1459d8bb4128';
+            const EHT_USDT_ADDRESS = '0x6C3e4cb2E96B01F4b866965A91ed4437839A121a';
+            const EHT_USDC_ADDRESS = '0x7FBa4B8Dc5E7616e59622806932DBea72537A56b';
 
             const dogeContract = new web3.eth.Contract(dogeStakingAbi, dogeTokenAddress);
-            const puppyToken = new web3.eth.Contract(puppyAbi, puppyTokenAddress);
             const ETH_DOGE = new web3.eth.Contract(ERC20_TOKEN, ETH_DOGE_ADDRESS);
             const EHT_USDT = new web3.eth.Contract(ERC20_TOKEN, EHT_USDT_ADDRESS);
             const EHT_USDC = new web3.eth.Contract(ERC20_TOKEN, EHT_USDC_ADDRESS);
@@ -63,29 +58,12 @@ export default class UserProvider extends Component {
             const accounts = await web3.eth.getAccounts();
             const user = accounts[0];
 
-            // console.log(
-            //     await ETH_DOGE.methods.approve(dogeContract._address, 1000).send({
-            //         from: user,
-            //         gas: '50000'
-            //     })
-            // )
-
-            console.log(
-                await ETH_DOGE.methods.balanceOf(user).call()
-            )
-
-            console.log(
-                await ETH_DOGE.methods.allowance(user, dogeContract._address).call()
-            )
-            
             this.setState({ 
                 loading: false,
                 web3, 
                 user,
                 dogeContract,
                 dogeTokenAddress,
-                puppyToken,
-                puppyTokenAddress,
                 ETH_DOGE,
                 EHT_USDT,
                 EHT_USDC
@@ -116,160 +94,94 @@ export default class UserProvider extends Component {
     }
 
     // DOGE-ETH
-    approveDogeEthTokens = async _amount => {
-        try {
-            const result = await this.state.ETH_DOGE.methods.approve(
-                this.state.dogeContract._address,
-                _amount.toString()
-            ).send({
-                from: this.state.user,
-                gas: '60000'
-            });
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    stakeDogeEthTokens = async _amount => {
+    stakeDogeEthTokens = async (_amount, { user } = this.state) => {
         try {
             const result = await this.state.dogeContract.methods.stakeDogeEthTokens(
-                _amount.toString()
-            ).send({
-                from: this.state.user,
-                gas: '60000'
-            })
+                this.toWei(_amount)
+            ).send({ from: user, gas: '60000' })
+            console.log(result)
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
     claimableDogeETHPuppyTokens = async () => {
         try {
-            const result = await this.state.dogeContract.methods.claimableDogeETHPuppyTokens(
+            let result = await this.state.dogeContract.methods.claimableDogeETHPuppyTokens(
                 this.state.user
             ).call();
+            result = this.fromWei(result);
+            console.log(result)
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
-    claimEthDogePuppyTokens = async () => {
+    claimEthDogePuppyTokens = async ({ user } = this.state) => {
         try {
             const result = await this.state.dogeContract.methods.claimEthDogePuppyTokens().send({
-                from: this.state.user,
-                gas: '60000'
+                from: user, gas: '60000'
             })
             console.log(result);
             return result
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
     // ETH-USDT
-    approveEthUsdtPuppyTokens = async _amount => {
-        try {
-            const result = await this.state.EHT_USDT.methods.approve(
-                this.state.dogeContract._address, 
-                _amount.toString()
-            ).send({
-                from: this.state.user,
-                gas: '60000'
-            });
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    stakeEthUsdtTokens = async _amount => {
+    stakeEthUsdtTokens = async (_amount, { user } = this.state) => {
         try {
             const result = await this.state.EHT_USDT.methods.stakeEthUsdtTokens(
-                _amount.toString()
-            ).send({
-                from: this.state.user,
-                gas: '60000'
-            })
+                this.toWei(_amount)
+            ).send({ from: user, gas: '60000' })
+            console.log(result)
             return result;
         } catch (error) { console.log(error.message) }
     }
 
     claimableEthUsdtPuppyTokens = async () => {
         try {
-            const result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
+            let result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
                 this.state.user
             ).call();
+            result = this.fromWei(result)
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
-    claimEthUsdtPuppyTokens = async () => {
+    claimEthUsdtPuppyTokens = async ({ user } = this.state) => {
         try {
             const result = await this.state.dogeContract.methods.claimEthUsdtPuppyTokens().send({
-                from: this.state.user,
-                gas: '60000'
+                from: user, gas: '60000'
             });
             console.log(result);
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
     // ETH-USDC
-    approveEthUsdcTokens = async _amount => {
-        try {
-            const result = await this.state.EHT_USDC.methods.approve(
-                this.state.dogeContract._address, 
-                _amount.toString()
-            ).send({
-                from: this.state.user,
-                gas: '60000'
-            });
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    stakeEthUsdcTokens = async _amount => {
+    stakeEthUsdcTokens = async (_amount, { user } = this.state) => {
         try {
             const result = await this.state.dogeContract.methods.stakeEthUsdcTokens(
-                _amount.toString()
-            ).send({
-                user: this.state.user,
-                from: this.toWei('0.000000025')
-            })
+                this.toWei(_amount)
+            ).send({ from: user, gas: this.toWei('0.000000025') })
+            console.log(result)
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
     claimableEthUsdcTokens = async () => {
         try {
-            const result = await this.state.dogeContract.methods.claimableEthUsdcTokens(
+            let result = await this.state.dogeContract.methods.claimableEthUsdcTokens(
                 this.state.user
             ).call();
+            result = this.fromWei(result);
+            console.log(result)
             return result;
-        } catch (error) {
-            console.log(error.message)
-        }
+        } catch (error) { console.log(error.message) }
     }
 
-    claimEthUsdcTokens = async () => {
+    claimEthUsdcTokens = async ({ user } = this.state) => {
         try {
             const result = await this.state.dogeContract.methods.claimEthUsdcTokens().send({
-                from: this.state.user,
-                gas: '60000'
+                from: user, gas: '60000' 
             });
             console.log(result);
             return result;
@@ -289,19 +201,16 @@ export default class UserProvider extends Component {
                 totalPuppyToken: this.totalPuppyToken,
 
                 // DOGE-ETH
-                approveDogeEthTokens: this.approveDogeEthTokens,
                 stakeDogeEthTokens: this.stakeDogeEthTokens,
                 claimableDogeETHPuppyTokens: this.claimableDogeETHPuppyTokens,
                 claimEthDogePuppyTokens: this.claimEthDogePuppyTokens,
 
                 // ETH-USDC
-                approveEthUsdtPuppyTokens: this.approveEthUsdtPuppyTokens,
                 stakeEthUsdtTokens: this.stakeEthUsdtTokens,
                 claimableEthUsdtPuppyTokens: this.claimableEthUsdtPuppyTokens,
                 claimEthUsdtPuppyTokens: this.claimEthUsdtPuppyTokens,
 
                 // ETH-USDT
-                approveEthUsdcTokens: this.approveEthUsdcTokens,
                 stakeEthUsdcTokens: this.stakeEthUsdcTokens,
                 claimableEthUsdcTokens: this.claimableEthUsdcTokens,
                 claimEthUsdcTokens: this.claimEthUsdcTokens
