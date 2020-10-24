@@ -49,7 +49,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    width: 35vw;
+    width: 25vw;
     margin: auto;
     z-index: 1;
     background: transparent;
@@ -58,9 +58,14 @@ body {
     margin-bottom: 10rem;
 }
 
+@media only screen and (max-width: 80rem) {
+    #modal-root {
+        width: 30vw;
+    }
+}
 @media only screen and (max-width: 60rem) {
     #modal-root {
-        width: 45vw;
+        width: 43vw;
     }
 }
 @media only screen and (max-width: 30rem) {

@@ -5,7 +5,7 @@ export const ExchangeContainer = styled.div`
     height: 100%;
     margin: 5rem auto 0;
     background: rgb(33, 36, 41);
-    padding: 2rem;
+    padding: 2rem .5em;
     border-radius: 2rem;
 
     .header {
