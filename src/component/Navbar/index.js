@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { FaAlignRight } from "react-icons/fa";
 import { userContext } from "../Context";
 import { NavbarContainer } from './navbar.styled.js';
-import './navbar.css';
+import './Navbar.css';
 
 export function Navbar({ theme }) {
     const [navOpen, setNavOpen] = useState(false);
