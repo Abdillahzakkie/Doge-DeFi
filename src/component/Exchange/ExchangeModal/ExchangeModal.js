@@ -10,7 +10,6 @@ const modalRoot = document.getElementById('modal-root');
 
 export const ExchangeModal = () => {
     const [modalData, setModalData] = useState(null);
-    const [input, setInput] = useState('');
     
     const fetchData = async () => {
         const { tokens } = await fetchModalData();
@@ -24,17 +23,6 @@ export const ExchangeModal = () => {
     const closeModal = () => {
         const modal = document.querySelector('#modal-root');
         modal.classList.add('modal-root-hide')
-    }
-
-    const handleSearchFilter = e => {
-        e.preventDefault();
-        const value = e.target.value;
-        setInput(value)
-        const result = modalData.filter(item => {
-            const symbol = item.symbol
-            return symbol === input.toLowwerCase()
-        })
-        setModalData(result);
     }
  
     const renderTokens = () => {
@@ -76,10 +64,8 @@ export const ExchangeModal = () => {
             <form className="grid form-control">
                 <input 
                     type="text" 
-                    value={input}
                     placeholder="tokenSearchPlaceholder" 
                     className="mode" 
-                    onChange={handleSearchFilter}
                 />
                 <div className="tokens small-mr">
                     <span>Token Name</span>
