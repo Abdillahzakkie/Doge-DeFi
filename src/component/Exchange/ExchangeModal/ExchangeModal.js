@@ -10,6 +10,7 @@ const modalRoot = document.getElementById('modal-root');
 
 export const ExchangeModal = () => {
     const [modalData, setModalData] = useState(null);
+    const [allTokens, setAllTokens] = useState(null);
     
     async function fetchData() {
         const { tokens } = await fetchModalData();
@@ -20,6 +21,12 @@ export const ExchangeModal = () => {
         if (!modalData) {
             fetchData();
         }
+        
+        if(modalData && modalData.length > 0) {
+            const token = renderTokens();
+            console.log(typeof token)
+            setAllTokens(token);
+        }
     
     }, [modalData]);
     
@@ -27,9 +34,19 @@ export const ExchangeModal = () => {
         const modal = document.querySelector('#modal-root');
         modal.classList.add('modal-root-hide')
     }
+     
+    const handleSearch = ({ target: { value }}) => {
+        const filterData = renderTokens(value);
+        setAllTokens(filterData);
+    }
  
-    const renderTokens = () => {
-        const tokens = modalData && modalData.sort();
+    const renderTokens = (searchToken="") => {
+        let tokens = modalData && modalData.sort();
+        
+        if (!searchToken || searchToken.trim().length > 0) {
+            tokens = tokens.filter(({symbol}) => (searchToken ? RegExp(`^${searchToken}`, "ig").test(symbol) : true))
+        }
+        
         return (
             <div style={{margin: "2rem 0", overflowY: 'scroll', height: '100px'}}>
                 {
@@ -65,7 +82,7 @@ export const ExchangeModal = () => {
             </section>
             <div>
             <form className="grid form-control">
-                <input type="text" placeholder="tokenSearchPlaceholder" className="mode" />
+                <input type="text" placeholder="tokenSearchPlaceholder" className="mode" onChange={handleSearch} />
                 <div className="tokens small-mr">
                     <span>Token Name</span>
                     <span className="arrow">↓</span>
@@ -73,8 +90,8 @@ export const ExchangeModal = () => {
                 
                 <div className="hr"></div>
                 
-                {modalData && modalData.length ? renderTokens(): null}
-                
+                {/* {modalData && modalData.length ? renderTokens(): null} */}
+                {allTokens && Object.values(allTokens).length > 0 ? allTokens : null}
                 <div className="hr"></div>
             </form>
                 <div className="modal-footer">
