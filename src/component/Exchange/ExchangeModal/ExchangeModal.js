@@ -26,7 +26,7 @@ export const ExchangeModal = () => {
             const token = renderTokens();
             setAllTokens(token);
         }
-        
+        // eslint-disable-next-line 
     }, [modalData]);
     
     const closeModal = () => {
