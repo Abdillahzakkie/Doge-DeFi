@@ -45,7 +45,7 @@ export default class UserProvider extends Component {
     loadBlockchainData = async () => {
         try {
             const web3 = window.web3;
-            const dogeTokenAddress = '0xb4fbed161bebcb37afb1cb4a6f7ca18b977ccb25';
+            const dogeTokenAddress = '0xE4A06D74af47924A2fa26205eeD6F7b6FC3144C0';
             const ETH_DOGE_ADDRESS = '0xb6916bc20cae34de64af39b8534d1459d8bb4128';
             const EHT_USDT_ADDRESS = '0x6C3e4cb2E96B01F4b866965A91ed4437839A121a';
             const EHT_USDC_ADDRESS = '0x7FBa4B8Dc5E7616e59622806932DBea72537A56b';

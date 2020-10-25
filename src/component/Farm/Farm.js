@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ErrorBoundary } from "../ErrorBoundary";
 import Navbar from '../Navbar';
 import { data } from "../data/menu";
+import logo from "../../asset/62_624227_puppy_cute_adorable_digital_cartoon_dog_animal_puppy.png";
+
 import './Farm.css';
 
 const Menu = () => {
@@ -32,7 +34,7 @@ const Menu = () => {
           <Navbar />  
             <div className="menu-container">
                 <div className="menu-item-one">
-                    <img src={require("../../asset/chef.jpg")} alt="chef" height="120px"/>
+                    <img src={logo} alt="chef" height="120px"/>
                     <h4 className="select-dish">Select your favourite dishes</h4>
                     <h3 className="sushi-token">Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY includes 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date.</h3>
                 </div>

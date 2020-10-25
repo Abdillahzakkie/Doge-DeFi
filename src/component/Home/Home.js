@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import { ErrorBoundary } from "../ErrorBoundary";
-import sushiChefLogo from "../../asset/chef.jpg";
+import logo from "../../asset/62_624227_puppy_cute_adorable_digital_cartoon_dog_animal_puppy.png";
 import { HomeContainer } from "./home.styled";
 
 function Home() {
@@ -10,7 +10,7 @@ function Home() {
             <Navbar />
             <div className="grid sushiChef">
                 <div className="logo">
-                    <img src={sushiChefLogo} alt=""/>
+                    <img src={logo} alt=""/>
                 </div>
                 <h4 className="select-dish">MasterChef is Ready</h4>
                 <h3 className="sushi-token">Stake SushiSwah3 LP tokens to claim your very own yummy SUSHI!</h3>

@@ -5,7 +5,7 @@ import Navbar from '../Navbar';
 import { handleApproveToken } from "../Helper/approveToken";
 import { handleHarvestToken } from "../Helper/harvestToken";
 import { handleStakeToken } from "../Helper/stakeToken";
-import logo from '../../asset/chef.jpg';
+import logo from "../../asset/62_624227_puppy_cute_adorable_digital_cartoon_dog_animal_puppy.png";
 import '../Farm/Farm.css';
 import { SingleStakePageContainer } from "./singleFarm.styled";
 
