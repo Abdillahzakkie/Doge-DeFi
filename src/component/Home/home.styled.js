@@ -7,7 +7,6 @@ export const HomeContainer = styled.div`
         padding: 2rem 0;
 
         .logo {
-            background: var(--mainWhite);
             width: 200px;
             height: 200px;
             margin: 0 auto 1rem;

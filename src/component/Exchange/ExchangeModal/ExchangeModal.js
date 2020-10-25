@@ -12,7 +12,7 @@ export const ExchangeModal = () => {
     const [modalData, setModalData] = useState(null);
     const [allTokens, setAllTokens] = useState(null);
     
-    async function fetchData() {
+    const fetchData = async () => {
         const { tokens } = await fetchModalData();
         setModalData(tokens)
     }
@@ -24,10 +24,9 @@ export const ExchangeModal = () => {
         
         if(modalData && modalData.length > 0) {
             const token = renderTokens();
-            console.log(typeof token)
             setAllTokens(token);
         }
-    
+        
     }, [modalData]);
     
     const closeModal = () => {
@@ -82,7 +81,12 @@ export const ExchangeModal = () => {
             </section>
             <div>
             <form className="grid form-control">
-                <input type="text" placeholder="tokenSearchPlaceholder" className="mode" onChange={handleSearch} />
+                <input 
+                    type="text" 
+                    placeholder="tokenSearchPlaceholder" 
+                    className="mode" 
+                    onChange={handleSearch}
+                />
                 <div className="tokens small-mr">
                     <span>Token Name</span>
                     <span className="arrow">↓</span>
@@ -90,8 +94,8 @@ export const ExchangeModal = () => {
                 
                 <div className="hr"></div>
                 
-                {/* {modalData && modalData.length ? renderTokens(): null} */}
                 {allTokens && Object.values(allTokens).length > 0 ? allTokens : null}
+                
                 <div className="hr"></div>
             </form>
                 <div className="modal-footer">

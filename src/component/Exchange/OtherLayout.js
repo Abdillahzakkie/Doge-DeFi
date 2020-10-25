@@ -6,7 +6,6 @@ let isModalOpen = true;
 const setIsModalOpen = () => {
     isModalOpen = !isModalOpen;
     const modal = document.querySelector('#modal-root');
-    console.log(isModalOpen, modal.classList)
 
     isModalOpen 
         ?  modal.classList.remove('modal-root-hide')

@@ -2,8 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ErrorBoundary } from "../ErrorBoundary";
 import { userContext } from '../Context';
 import Navbar from '../Navbar';
-import { handleApproveToken, handleStakeToken, handleHarvestToken } from "../Helper";
-import logo from '../../asset/chef.jpg';
+import { handleApproveToken } from "../Helper/approveToken";
+import { handleHarvestToken } from "../Helper/harvestToken";
+import { handleStakeToken } from "../Helper/stakeToken";
+import logo from "../../asset/62_624227_puppy_cute_adorable_digital_cartoon_dog_animal_puppy.png";
 import '../Farm/Farm.css';
 import { SingleStakePageContainer } from "./singleFarm.styled";
 
@@ -14,27 +16,23 @@ const SingleStakePage = ({ match, history }) => {
     const userConsumer = useContext(userContext);
 
     const { 
-        loading, 
-        getSlug, 
-        approveDogeEthTokens, 
-        claimEthDogePuppyTokens,
-        claimableDogeETHPuppyTokens,
-        approveEthUsdtPuppyTokens, 
-        claimEthUsdtPuppyTokens,
-        claimableEthUsdtPuppyTokens,
-        approveEthUsdcTokens ,
-        claimEthUsdcTokens,
-        claimableEthUsdcTokens,
+        loading, getSlug, web3, dogeTokenAddress, user,
 
-        stakeDogeEthTokens, 
-        stakeEthUsdtTokens,
-        stakeEthUsdcTokens
+        ETH_DOGE, claimEthDogePuppyTokens,
+        claimableDogeETHPuppyTokens, stakeDogeEthTokens,
+
+        EHT_USDT, claimEthUsdtPuppyTokens,
+        claimableEthUsdtPuppyTokens, stakeEthUsdtTokens,
+
+        EHT_USDC, claimEthUsdcTokens,
+        claimableEthUsdcTokens, stakeEthUsdcTokens
     } = userConsumer;
     const card = getSlug(match.params.id);
-    let shouldReload = false;
+    let shouldReload = true;
+    if(harvestBalance === '0') shouldReload = false;
 
     useEffect(() => {
-        if(loading === false && shouldReload === false) {
+        if(loading === false && shouldReload) {
             (async () => {
                 if(card.title1 === 'Water') {
                     const result = (await claimableDogeETHPuppyTokens())['1'];
@@ -61,41 +59,28 @@ const SingleStakePage = ({ match, history }) => {
     
     const submitApprove = async e => {
         const result = await handleApproveToken(
-            loading, 
-            approveAmount, 
-            card,
-            approveDogeEthTokens, 
-            approveEthUsdtPuppyTokens,
-            approveEthUsdcTokens
+            loading, approveAmount, card,
+            web3, user, ETH_DOGE, 
+            EHT_USDT, EHT_USDC, dogeTokenAddress
         )(e)
         console.log(result)
     }
 
     const submitStake = async e => {
         const result = await handleStakeToken(
-            loading, 
-            stakeAmount, 
-            card,
-            stakeDogeEthTokens, 
-            stakeEthUsdtTokens,
-            stakeEthUsdcTokens
+            loading, stakeAmount, card,
+            stakeDogeEthTokens, stakeEthUsdtTokens, stakeEthUsdcTokens
         )(e)
         console.log(result)
     }
 
     const submitHarvest = async e => {
         const result = await handleHarvestToken(
-            loading,
-            card,
-            harvestBalance,
-            claimEthDogePuppyTokens,
-            claimEthUsdtPuppyTokens,
-            claimEthUsdcTokens
+            loading, card, harvestBalance,
+            claimEthDogePuppyTokens, claimEthUsdtPuppyTokens, claimEthUsdcTokens
         )(e)
         console.log(result)
     }
-
-    if(harvestBalance === '0') shouldReload = true;
 
     return (
         <>
