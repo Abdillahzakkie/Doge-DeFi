@@ -116,7 +116,7 @@ const SingleStakePage = ({ match, history }) => {
                         <div style={{margin: '1rem 0 3rem 0'}}>
                             <h4 className="card-head">{card.title1}</h4>
                             <p className="card-text">{card.title2}</p>
-                            <p className="card-text">{`${harvestBalance}.00`}</p>
+                            <p className="card-text">{harvestBalance ? `${harvestBalance}.00` : '0.00'}</p>
                         </div>
                         <button className="card-btn" onClick={submitHarvest}>
                             Harvest
