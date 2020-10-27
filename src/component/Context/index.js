@@ -68,9 +68,7 @@ export default class UserProvider extends Component {
                 EHT_USDT,
                 EHT_USDC
             });
-        } catch (error) {
-            console.log(error)
-        }
+        } catch (error) { console.log(error) }
     }
 
     toWei = value => this.state.web3.utils.toWei(String(value), 'ether');
@@ -109,7 +107,7 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableDogeETHPuppyTokens(
                 this.state.user
             ).call();
-            result = this.fromWei(result);
+            // result = this.fromWei(result);
             console.log(result)
             return result;
         } catch (error) { console.log(error.message) }
@@ -141,7 +139,8 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
                 this.state.user
             ).call();
-            result = this.fromWei(result)
+            // result = this.fromWei(result);
+            console.log(result);
             return result;
         } catch (error) { console.log(error.message) }
     }
@@ -172,7 +171,7 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableEthUsdcTokens(
                 this.state.user
             ).call();
-            result = this.fromWei(result);
+            // result = this.fromWei(result);
             console.log(result)
             return result;
         } catch (error) { console.log(error.message) }

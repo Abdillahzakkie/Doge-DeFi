@@ -6,10 +6,10 @@ export const handleApproveToken = (
 ) => async (e) => {
     e.preventDefault();
     if(loading) return alert('Unlock your account to proceed');
-    const token = card.title1;
+    const tokenName = card.title1;
 
     if(approveAmount === '') return alert ('Please approve an amount before continuing');
-    if(token === 'Water') {
+    if(tokenName === 'Water') {
         try {
             const result = await ETH_DOGE.methods.approve(
                 dogeTokenAddress, web3.utils.toWei(approveAmount)
@@ -18,7 +18,7 @@ export const handleApproveToken = (
             
         } catch (error) { console.log(error.message) }
 
-    } else if(token === 'Fish') {
+    } else if(tokenName === 'Fish') {
         try {
             const result = await EHT_USDT.methods.approve(
                 dogeTokenAddress, web3.utils.toWei(approveAmount)
@@ -27,7 +27,7 @@ export const handleApproveToken = (
 
         } catch (error) { console.log(error.message) }
 
-    } else if(token === 'Eat') {
+    } else if(tokenName === 'Eat') {
         try {
             const result = await EHT_USDC.methods.approve(
                 dogeTokenAddress, web3.utils.toWei(approveAmount)

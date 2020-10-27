@@ -32,23 +32,23 @@ const SingleStakePage = ({ match, history }) => {
     if(harvestBalance === '0') shouldReload = false;
 
     useEffect(() => {
-        if(loading === false && shouldReload) {
-            (async () => {
-                if(card.title1 === 'Water') {
-                    const result = (await claimableDogeETHPuppyTokens())['1'];
-                    setHarvestBalance(() => result)
-                } else if(card.title1 === 'Fish') {
-                    const result = (await claimableEthUsdtPuppyTokens())['1'];
-                    setHarvestBalance(() => result)
-                } else if(card.title1 === 'Eat') {
-                    const result = (await claimableEthUsdcTokens())['1'];
-                    setHarvestBalance(() => result)
-                }
-            })()
-        }
-        return;
+        if(loading && !shouldReload) return;
+        const tokenName = card.title1;
+        (async () => {
+            if(tokenName === 'Water') {
+                const result = (await claimableDogeETHPuppyTokens())['1'];
+                setHarvestBalance(() => result)
+            } else if(tokenName === 'Fish') {
+                const result = (await claimableEthUsdtPuppyTokens())['1'];
+                setHarvestBalance(() => result)
+            } else if(tokenName === 'Eat') {
+                const result = (await claimableEthUsdcTokens())['1'];
+                setHarvestBalance(() => result)
+            }
+        })()
+
     }, [
-        loading, shouldReload,
+        loading, shouldReload, harvestBalance,
         setHarvestBalance, card.title1, 
         claimableDogeETHPuppyTokens, 
         claimableEthUsdtPuppyTokens, 
@@ -58,28 +58,25 @@ const SingleStakePage = ({ match, history }) => {
     if(!card) return history.push('/menu');
     
     const submitApprove = async e => {
-        const result = await handleApproveToken(
+        await handleApproveToken(
             loading, approveAmount, card,
             web3, user, ETH_DOGE, 
             EHT_USDT, EHT_USDC, dogeTokenAddress
         )(e)
-        console.log(result)
     }
 
     const submitStake = async e => {
-        const result = await handleStakeToken(
+        await handleStakeToken(
             loading, stakeAmount, card,
             stakeDogeEthTokens, stakeEthUsdtTokens, stakeEthUsdcTokens
         )(e)
-        console.log(result)
     }
 
     const submitHarvest = async e => {
-        const result = await handleHarvestToken(
+        await handleHarvestToken(
             loading, card, harvestBalance,
             claimEthDogePuppyTokens, claimEthUsdtPuppyTokens, claimEthUsdcTokens
         )(e)
-        console.log(result)
     }
 
     return (

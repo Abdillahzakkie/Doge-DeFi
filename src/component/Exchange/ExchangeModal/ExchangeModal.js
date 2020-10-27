@@ -4,7 +4,7 @@ import { AiOutlineQuestionCircle, AiOutlineClose } from "react-icons/ai";
 import { ErrorBoundary } from "../../ErrorBoundary";
 import { ExchangeContainer } from "./exchangeModal.styled";
 import '../Exchange.css';
-import fetchModalData from '../../../utils/fetchModalData';
+import fetchModalData from '../../Helper/fetchModalData';
 
 const modalRoot = document.getElementById('modal-root');
 
