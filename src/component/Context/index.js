@@ -131,8 +131,6 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableDogeETHPuppyTokens(
                 this.state.user
             ).call();
-            // result = this.fromWei(result);
-            console.log(result)
             return result;
         } catch (error) { console.log(error.message) }
     }
@@ -163,8 +161,6 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableEthUsdtPuppyTokens(
                 this.state.user
             ).call();
-            // result = this.fromWei(result);
-            console.log(result);
             return result;
         } catch (error) { console.log(error.message) }
     }
@@ -195,8 +191,6 @@ export default class UserProvider extends Component {
             let result = await this.state.dogeContract.methods.claimableEthUsdcTokens(
                 this.state.user
             ).call();
-            // result = this.fromWei(result);
-            console.log(result)
             return result;
         } catch (error) { console.log(error.message) }
     }

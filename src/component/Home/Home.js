@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../Navbar';
 import { ErrorBoundary } from "../ErrorBoundary";
+import { userContext } from "../Context";
 import logo from "../../asset/62_624227_puppy_cute_adorable_digital_cartoon_dog_animal_puppy.png";
 import { HomeContainer } from "./home.styled";
 
 function Home() {
+    const userConsumer = useContext(userContext);
+    const { loading, claimableDogeETH, claimableEthUsdt, claimableEthUsdc } = userConsumer;
+    const totalBalance = [claimableDogeETH, claimableEthUsdt, claimableEthUsdc].reduce((prev, next) => {
+        next = Number(prev) + Number(next);
+        return next;
+    }, [0]);
+
     return (
         <HomeContainer className='grid'>
             <Navbar />
@@ -23,7 +31,7 @@ function Home() {
                     </div>
                     <div className="grid token">
                         <p>Your SUSHI Balance</p>
-                        <h1>Locked</h1>
+                        <h1>{loading ? 'Locked' : `${totalBalance}.00`}</h1>
                     </div>
                     <div className="grid result">
                         <p>pending harvesting</p>
