@@ -19,40 +19,25 @@ const SingleStakePage = ({ match, history }) => {
         loading, getSlug, web3, dogeTokenAddress, user,
 
         ETH_DOGE, claimEthDogePuppyTokens,
-        claimableDogeETHPuppyTokens, stakeDogeEthTokens,
+        claimableDogeETH, stakeDogeEthTokens,
 
         EHT_USDT, claimEthUsdtPuppyTokens,
-        claimableEthUsdtPuppyTokens, stakeEthUsdtTokens,
+        claimableEthUsdt, stakeEthUsdtTokens,
 
         EHT_USDC, claimEthUsdcTokens,
-        claimableEthUsdcTokens, stakeEthUsdcTokens
+        claimableEthUsdc, stakeEthUsdcTokens
     } = userConsumer;
     const card = getSlug(match.params.id);
-    let shouldReload = true;
-    if(harvestBalance === '0') shouldReload = false;
 
     useEffect(() => {
-        if(loading && !shouldReload) return;
         const tokenName = card.title1;
-        (async () => {
-            if(tokenName === 'Water') {
-                const result = (await claimableDogeETHPuppyTokens())['1'];
-                setHarvestBalance(() => result)
-            } else if(tokenName === 'Fish') {
-                const result = (await claimableEthUsdtPuppyTokens())['1'];
-                setHarvestBalance(() => result)
-            } else if(tokenName === 'Eat') {
-                const result = (await claimableEthUsdcTokens())['1'];
-                setHarvestBalance(() => result)
-            }
-        })()
+        if(tokenName === 'Water') setHarvestBalance(() => claimableDogeETH);
+        else if(tokenName === 'Fish') setHarvestBalance(() => claimableEthUsdt);  
+        else if(tokenName === 'Eat') setHarvestBalance(() => claimableEthUsdc);
 
     }, [
-        loading, shouldReload, harvestBalance,
-        setHarvestBalance, card.title1, 
-        claimableDogeETHPuppyTokens, 
-        claimableEthUsdtPuppyTokens, 
-        claimableEthUsdcTokens
+        card.title1, setHarvestBalance, claimableDogeETH, 
+        claimableEthUsdt, claimableEthUsdc
     ])
 
     if(!card) return history.push('/menu');

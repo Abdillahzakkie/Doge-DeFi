@@ -17,8 +17,11 @@ export default class UserProvider extends Component {
             dogeContract: null,
             dogeTokenAddress: null,
             ETH_DOGE: null,
+            claimableDogeETH: null,
             EHT_USDT: null,
+            claimableEthUsdt: null,
             EHT_USDC: null,
+            claimableEthUsdc: null
         }
     }
 
@@ -80,6 +83,27 @@ export default class UserProvider extends Component {
     connectWallet = async () => {
         await this.loadWeb3();
         await this.loadBlockchainData();
+
+        await this.loadTokenBalance();
+    }
+
+    loadTokenBalance = async () => {
+        try {
+            let claimableDogeETH = (await this.claimableDogeETHPuppyTokens())['1'];
+            claimableDogeETH = this.fromWei(claimableDogeETH);
+
+            let claimableEthUsdt = (await this.claimableEthUsdtPuppyTokens())['1'];
+            claimableEthUsdt = this.fromWei(claimableEthUsdt);
+
+            let claimableEthUsdc = (await this.claimableEthUsdcTokens())['1'];
+            claimableEthUsdc = this.fromWei(claimableEthUsdc);
+
+            this.setState({
+                claimableDogeETH, 
+                claimableEthUsdt, 
+                claimableEthUsdc
+            })
+        } catch (error) { console.log(error.message) }
     }
 
     stakedAllTokens = async _account => {
